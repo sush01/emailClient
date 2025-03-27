@@ -1,17 +1,12 @@
-import {  FormGroup, Validator} from "@angular/forms";
+import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 
+export class MatchPassword {
+  static validate(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const password = control.get('password')?.value;
+      const passwordConfirmation = control.get('passwordConfirmation')?.value;
 
-export class MatchPassword implements Validator{
-
-  validate(FormGroup: FormGroup) {
-    const { password, passwordConfirmation} = FormGroup.value;
-
-    if (password === passwordConfirmation){
-      return null;
-    } else {
-      return { passwordsDontMatch: true};
-    }
-    
+      return password === passwordConfirmation ? null : { passwordsDontMatch: true };
+    };
   }
-
 }
