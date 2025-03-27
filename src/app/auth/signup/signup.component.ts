@@ -11,7 +11,10 @@ import { MatchPassword } from '../validators/match-password';
 })
 export class SignupComponent {
 
-  authForm = new FormGroup({
+  authForm : FormGroup;
+  
+  constructor(){
+    this.authForm = new FormGroup({
     username: new FormControl('', [
       Validators.required,
       Validators.minLength(3),
@@ -28,8 +31,6 @@ export class SignupComponent {
         Validators.minLength(4),
         Validators.maxLength(20)
     ])
-  },{validators: MatchPassword.validate()});
-
-  constructor(){}
+  },{validators: MatchPassword.validate()});}
 
 }
