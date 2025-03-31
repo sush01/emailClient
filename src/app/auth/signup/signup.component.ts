@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component , inject} from '@angular/core';
 import { FormGroup, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatchPassword } from '../validators/match-password';
-
+import { UniqueUser } from '../validators/unique-user';
 @Component({
   selector: 'app-signup',
   imports: [CommonModule,ReactiveFormsModule],
@@ -11,13 +11,16 @@ import { MatchPassword } from '../validators/match-password';
 })
 export class SignupComponent {
 
+  private uniqueUser = inject(UniqueUser);
+
   authForm = new FormGroup({
     username: new FormControl('', [
       Validators.required,
       Validators.minLength(3),
       Validators.maxLength(20),
       Validators.pattern(/[a-z0-9]+$/)
-    ]),
+    ], [this.uniqueUser.validate]
+  ),
     password: new FormControl('',[
       Validators.required,
       Validators.minLength(4),
@@ -30,6 +33,8 @@ export class SignupComponent {
     ])
   },{validators: [MatchPassword.validate()]});
 
-  constructor(private matchPassword: MatchPassword){}
+  constructor(
+    private matchPassword: MatchPassword
+  ){}
 
 }
