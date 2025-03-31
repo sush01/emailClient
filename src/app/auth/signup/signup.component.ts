@@ -3,9 +3,10 @@ import { Component , inject} from '@angular/core';
 import { FormGroup, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatchPassword } from '../validators/match-password';
 import { UniqueUser } from '../validators/unique-user';
+import { InputComponent } from "../../shared/input/input.component";
 @Component({
   selector: 'app-signup',
-  imports: [CommonModule,ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, InputComponent],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.css'
 })
