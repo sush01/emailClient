@@ -12,7 +12,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 export class InputComponent {
 
   @Input() label: string = '';
-  @Input() control: FormControl = new FormControl('')  ;
+  @Input() control: FormControl = new FormControl('');
+  @Input() inputType:string = 'text';
 
 
   showErrors(){

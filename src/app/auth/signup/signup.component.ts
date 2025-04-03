@@ -42,5 +42,11 @@ export class SignupComponent {
     return this.authForm.get('username') as FormControl;
   }
   
+  get passwordControl(): FormControl {
+    return this.authForm.get('password') as FormControl;
+  }
+  get passwordConfirmationControl(): FormControl {
+    return this.authForm.get('passwordConfirmation') as FormControl;
+  }
 
 }
