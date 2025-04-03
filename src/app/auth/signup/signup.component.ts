@@ -38,4 +38,9 @@ export class SignupComponent {
     private matchPassword: MatchPassword
   ){}
 
+  get usernameControl(): FormControl {
+    return this.authForm.get('username') as FormControl;
+  }
+  
+
 }

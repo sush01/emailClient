@@ -25,8 +25,9 @@ export class UniqueUser implements AsyncValidator {
           return { nonUniqueUser: true }; // Username is taken (validation error)
         }
       }),
-      catchError(() => {
+      catchError((error) => {
         // Handle HTTP errors gracefully and always return an error object
+        console.error('Error occurred during username validation:', error);
         return of({ serverError: true });
       })
     );
