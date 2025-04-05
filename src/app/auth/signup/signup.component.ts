@@ -63,7 +63,7 @@ export class SignupComponent {
       passwordConfirmation: this.passwordConfirmationControl.value!
     })
     .subscribe((response)=> {
-      console.log(response);
+      console.log(response.username);
     });
   }
 
