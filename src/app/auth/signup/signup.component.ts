@@ -4,6 +4,8 @@ import { FormGroup, FormControl, ReactiveFormsModule, Validators } from '@angula
 import { MatchPassword } from '../validators/match-password';
 import { UniqueUser } from '../validators/unique-user';
 import { InputComponent } from "../../shared/input/input.component";
+import { AuthService } from '../auth.service';
+
 @Component({
   selector: 'app-signup',
   imports: [CommonModule, ReactiveFormsModule, InputComponent],
@@ -11,6 +13,7 @@ import { InputComponent } from "../../shared/input/input.component";
   styleUrl: './signup.component.css'
 })
 export class SignupComponent {
+
 
   private uniqueUser = inject(UniqueUser);
 
@@ -35,7 +38,8 @@ export class SignupComponent {
   },{validators: [MatchPassword.validate()]});
 
   constructor(
-    private matchPassword: MatchPassword
+    private matchPassword: MatchPassword,
+    private authService: AuthService
   ){}
 
   get usernameControl(): FormControl {
@@ -48,5 +52,20 @@ export class SignupComponent {
   get passwordConfirmationControl(): FormControl {
     return this.authForm.get('passwordConfirmation') as FormControl;
   }
+  
+  onSubmit(){
+    if(this.authForm.invalid){
+      return;
+    }
+    this.authService.signup({
+      username: this.usernameControl.value!,
+      password: this.passwordControl.value!,
+      passwordConfirmation: this.passwordConfirmationControl.value!
+    })
+    .subscribe((response)=> {
+      console.log(response);
+    });
+  }
+
 
 }
