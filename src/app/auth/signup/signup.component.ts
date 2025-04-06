@@ -62,8 +62,18 @@ export class SignupComponent {
       password: this.passwordControl.value!,
       passwordConfirmation: this.passwordConfirmationControl.value!
     })
-    .subscribe((response)=> {
-      console.log(response.username);
+    .subscribe( {
+      //console.log(response.username);
+      next: response => {
+
+      },
+      error: err => {
+        if (!err.status){
+          this.authForm.setErrors({noConnection: true });
+        }else{
+          this.authForm.setErrors({ unknownError: true});
+        }
+      }
     });
   }
 
