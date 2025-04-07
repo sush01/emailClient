@@ -5,6 +5,10 @@ import { Observable } from "rxjs";
 @Injectable()  //http interceptor 
 export class AuthHttpInterceptor implements HttpInterceptor{
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-      
+    // Modify or log the outgoing request 
+    const modifiedReq = req.clone({
+      withCredentials: true,
+    }) 
+    return next.handle(modifiedReq);
   }
 }

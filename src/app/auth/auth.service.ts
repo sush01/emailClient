@@ -52,7 +52,6 @@ export class AuthService {
       withCredentials: true
     }).pipe(
       tap(response => {
-        console.log(response);
         this.signedin$.next(response.signedin);
       })
     );

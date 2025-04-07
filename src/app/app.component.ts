@@ -3,7 +3,6 @@ import { RouterModule, RouterOutlet } from '@angular/router';
 import { AuthService } from './auth/auth.service';
 import { CommonModule } from '@angular/common';
 import { BehaviorSubject } from 'rxjs';
-import { HttpClient, provideHttpClient, withFetch } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +11,7 @@ import { HttpClient, provideHttpClient, withFetch } from '@angular/common/http';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  //title = 'emailClient';
+  title = 'emailClient';
   signedin$: BehaviorSubject<boolean>;
 
   constructor(private authService: AuthService){
@@ -21,7 +20,7 @@ export class AppComponent {
   }
 
   ngOnInit(){
-    this.authService.checkAuth().subscribe (()=>{});
+    this.authService.checkAuth().subscribe();
   }
 
 }
