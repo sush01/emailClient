@@ -3,6 +3,7 @@ import { RouterModule, RouterOutlet } from '@angular/router';
 import { AuthService } from './auth/auth.service';
 import { CommonModule } from '@angular/common';
 import { BehaviorSubject } from 'rxjs';
+import { HttpClient, provideHttpClient, withFetch } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -17,6 +18,10 @@ export class AppComponent {
   constructor(private authService: AuthService){
     this.signedin$ = this.authService.signedin$;
 
+  }
+
+  ngOnInit(){
+    this.authService.checkAuth().subscribe (()=>{});
   }
 
 }

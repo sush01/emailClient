@@ -4,15 +4,15 @@
 
     <div class="right menu">
         <ng-container *ngIf="signedin$ | async">
-          <a class="ui item" routerLink="/inbox" routerLinkActive="active-link">
+          <a class="ui item" routerLink="/inbox" routerLinkActive="active">
             Inbox
           </a>
-          <a class="ui item" routerLink="/signout" routerLinkActive="active-link">
+          <a class="ui item" routerLink="/signout" routerLinkActive="active">
             Sign Out
           </a>
         </ng-container>
       <ng-container *ngIf="!(signedin$ | async)">
-        <a class="ui item" routerLink="/" routerLinkActive="active-link" >
+        <a class="ui item" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]= "{exact:true}">
           Sign In
         </a>
         <a class="ui item" routerLink="/signup" routerLinkActive="active" >
