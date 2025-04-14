@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient,provideHttpClient } from '@angular/common/http';
-import { BehaviorSubject ,tap} from 'rxjs';
-
+import { HttpClient, provideHttpClient } from '@angular/common/http';
+import { BehaviorSubject, tap } from 'rxjs';
 
 interface usernameAvailableResponse {
   available: boolean;
@@ -20,40 +19,48 @@ interface CheckAuthResponse {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
   rootUrl = 'https://api.angular-email.com';
   signedin$ = new BehaviorSubject(false);
 
-  constructor(private http:HttpClient) { }
-
-  usernameAvailable (username: string){
-      return this.http.post<usernameAvailableResponse>(
-        `${this.rootUrl}/auth/username`, {
-        username: username
+  constructor(private http: HttpClient) {
+    this.signedin$.subscribe((item) => {
+      console.log('SignedIn Observable:', item);
     });
   }
 
-  signup(credentials: SignupCredentials){
-    return this.http.post<SignupResponse> (
-      `${this.rootUrl}/auth/signup`, credentials,{
-        withCredentials: true
-      })
-      .pipe(
-      tap(() => {
-        this.signedin$.next(true);
-        this.checkAuth().subscribe();
-      })
+  usernameAvailable(username: string) {
+    return this.http.post<usernameAvailableResponse>(
+      `${this.rootUrl}/auth/username`,
+      {
+        username: username,
+      }
     );
   }
-  checkAuth(){
-    return this.http.get<CheckAuthResponse>(`${this.rootUrl}/auth/signedin`,{
-      withCredentials: true
-    }).pipe(
-      tap(response => {
-        this.signedin$.next(response.signedin);
+
+  signup(credentials: SignupCredentials) {
+    return this.http
+      .post<SignupResponse>(`${this.rootUrl}/auth/signup`, credentials, {
+        withCredentials: true,
       })
-    );
+      .pipe(
+        tap(() => {
+          this.checkAuth().subscribe();
+        })
+      );
+  }
+  checkAuth() {
+    return this.http
+      .get<CheckAuthResponse>(`${this.rootUrl}/auth/signedin`, {
+        withCredentials: true,
+      })
+      .pipe(
+        tap((response) => {
+          console.log(response);
+          this.signedin$.next(response.signedin);
+        })
+      );
   }
 }
