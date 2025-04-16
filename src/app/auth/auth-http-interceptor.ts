@@ -9,12 +9,15 @@ export class AuthHttpInterceptor implements HttpInterceptor{
     // Modify or log the outgoing request 
     const modifiedReq = req.clone({
       withCredentials: true,
-    }) 
-    return next.handle(modifiedReq).pipe(
-      filter(val => val.type === HttpEventType.Sent),
-      tap(val => {
-        console.log('Sent the request');
-      })
-    )  
+    });
+    
+    return next.handle(modifiedReq);
+    
+    // return next.handle(modifiedReq).pipe(
+    //   filter(val => val.type === HttpEventType.Sent),
+    //   tap(val => {
+    //     console.log('Sent the request');
+    //   })
+    // )  
   }
 }

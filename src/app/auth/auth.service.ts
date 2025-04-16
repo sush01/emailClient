@@ -18,6 +18,13 @@ interface CheckAuthResponse {
   signedin: boolean;
 }
 
+interface SignedinResponse {
+  authenticated: boolean;
+  username: string;
+}
+
+
+
 @Injectable({
   providedIn: 'root',
 })
@@ -25,11 +32,7 @@ export class AuthService {
   rootUrl = 'https://api.angular-email.com';
   signedin$ = new BehaviorSubject(false);
 
-  constructor(private http: HttpClient) {
-    this.signedin$.subscribe((item) => {
-      console.log('SignedIn Observable:', item);
-    });
-  }
+  constructor(private http: HttpClient) {}
 
   usernameAvailable(username: string) {
     return this.http.post<usernameAvailableResponse>(
@@ -52,14 +55,10 @@ export class AuthService {
       );
   }
   checkAuth() {
-    return this.http
-      .get<CheckAuthResponse>(`${this.rootUrl}/auth/signedin`, {
-        withCredentials: true,
-      })
+    return this.http.get<SignedinResponse>(`${this.rootUrl}/auth/signedin`)
       .pipe(
-        tap((response) => {
-          console.log(response);
-          this.signedin$.next(response.signedin);
+        tap(({authenticated}) => {
+          this.signedin$.next(authenticated);
         })
       );
   }
