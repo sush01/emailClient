@@ -13,6 +13,7 @@ export class AuthHttpInterceptor implements HttpInterceptor{
     
     return next.handle(modifiedReq);
     
+    //Events around the request
     // return next.handle(modifiedReq).pipe(
     //   filter(val => val.type === HttpEventType.Sent),
     //   tap(val => {
