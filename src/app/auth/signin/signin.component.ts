@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { InputComponent } from "../../shared/input/input.component";
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { AuthService } from '../auth.service';
 @Component({
   selector: 'app-signin',
-  imports: [ReactiveFormsModule, InputComponent],
+  imports: [ReactiveFormsModule, InputComponent,CommonModule],
   templateUrl: './signin.component.html',
   styleUrl: './signin.component.css'
 })
@@ -24,6 +26,8 @@ export class SigninComponent {
       ])
     });
 
+    constructor (private authService: AuthService){}
+
 
     get usernameControl(): FormControl {
       return this.authForm.get('username') as FormControl;
@@ -31,5 +35,25 @@ export class SigninComponent {
     
     get passwordControl(): FormControl {
       return this.authForm.get('password') as FormControl;
+    }
+
+    onSubmit(){
+      if(this.authForm.invalid){
+        return;
+      }
+      const { username, password } = this.authForm.value;
+      if (username && password){
+        this.authService.signin({username, password}).subscribe({
+          next:() =>{
+            //console.log('Login successful!');
+          },
+          error: (err) => {
+            //console.error('Login error:', err);
+              this.authForm.setErrors({credentials: true});
+            
+          }
+        })
+      }
+      
     }
 }
