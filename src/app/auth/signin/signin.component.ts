@@ -4,6 +4,7 @@ import { InputComponent } from "../../shared/input/input.component";
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-signin',
   imports: [ReactiveFormsModule, InputComponent,CommonModule],
@@ -26,7 +27,7 @@ export class SigninComponent {
       ])
     });
 
-    constructor (private authService: AuthService){}
+    constructor (private authService: AuthService, private router: Router){}
 
 
     get usernameControl(): FormControl {
@@ -46,6 +47,7 @@ export class SigninComponent {
         this.authService.signin({username, password}).subscribe({
           next:() =>{
             //console.log('Login successful!');
+            this.router.navigateByUrl('/inbox');
           },
           error: (err) => {
             //console.error('Login error:', err);
@@ -54,6 +56,5 @@ export class SigninComponent {
           }
         })
       }
-      
     }
 }
