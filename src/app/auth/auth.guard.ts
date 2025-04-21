@@ -12,7 +12,7 @@ export const authGuard: CanMatchFn = (route, segments) => {
   return authService.isAuthenticated().pipe(
     tap(authenticated => {
       if (!authenticated){
-        router.navigate(['/login']);
+        router.navigate(['/']);
       }
     }),
     map(authenticated => authenticated)
