@@ -85,4 +85,8 @@ export class AuthService {
       })
     )
   }
+
+  isAuthenticated() {
+    return this.signedin$.asObservable();
+  }
 }
