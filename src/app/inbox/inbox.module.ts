@@ -15,7 +15,6 @@ import { EmailIndexComponent } from './email-index/email-index.component';
     HomeComponent,
     RouterModule,
     EmailShowComponent,
-    PlaceholderComponent,
     EmailIndexComponent
   ]
 })

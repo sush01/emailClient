@@ -5,13 +5,16 @@ import { PlaceholderComponent } from './placeholder/placeholder.component';
 import { EmailShowComponent } from './email-show/email-show.component';
 
 const routes: Routes = [
-  {path: '', component: HomeComponent,
+  { 
+    path: '', 
+    component: HomeComponent,
     children: [
-      { path: ':id', component:EmailShowComponent},
-      { path: '', component: PlaceholderComponent }
+      { path: ':id', component: EmailShowComponent }, // Make sure this comes first
+      { path: '', component: PlaceholderComponent }   // Default route
     ]
   }
 ];
+
 
 @NgModule({
   imports: [RouterModule.forChild(routes),],

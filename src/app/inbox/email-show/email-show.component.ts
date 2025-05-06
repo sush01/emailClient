@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component , OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-email-show',
@@ -6,6 +6,10 @@ import { Component } from '@angular/core';
   templateUrl: './email-show.component.html',
   styleUrl: './email-show.component.css'
 })
-export class EmailShowComponent {
+export class EmailShowComponent implements OnInit{
+  ngOnInit(): void {
+    throw new Error('Method not implemented.');
+  }
 
+  
 }
