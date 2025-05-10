@@ -1,8 +1,8 @@
 import { Component, ElementRef, OnInit, EventEmitter, Output} from '@angular/core';
-
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-modal',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './modal.component.html',
   styleUrl: './modal.component.css'
 })

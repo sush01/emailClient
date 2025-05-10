@@ -6,7 +6,7 @@ import { RouterModule } from '@angular/router';
 import { EmailShowComponent } from './email-show/email-show.component';
 import { PlaceholderComponent } from './placeholder/placeholder.component';
 import { EmailIndexComponent } from './email-index/email-index.component';
-
+import { SharedModule } from '../shared/shared.module';
 @NgModule({
   declarations: [],
   imports: [
@@ -15,7 +15,8 @@ import { EmailIndexComponent } from './email-index/email-index.component';
     HomeComponent,
     RouterModule,
     EmailShowComponent,
-    EmailIndexComponent
+    EmailIndexComponent,
+    SharedModule
   ]
 })
 export class InboxModule { }
