@@ -1,8 +1,9 @@
 import { Component, ElementRef, OnInit, EventEmitter, Output} from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 @Component({
   selector: 'app-modal',
-  imports: [CommonModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './modal.component.html',
   styleUrl: './modal.component.css'
 })

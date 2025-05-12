@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component , Input} from '@angular/core';
-import { FormControl, Validator} from '@angular/forms';
+import { AbstractControl, FormControl, Validator} from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
@@ -12,7 +12,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 export class InputComponent {
 
   @Input() label: string = '';
-  @Input() control: FormControl = new FormControl('');
+  @Input() control!: FormControl<any>;
   @Input() inputType:string = 'text';
 
 
