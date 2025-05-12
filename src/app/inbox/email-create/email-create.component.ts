@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ModalComponent } from '../../shared/modal/modal.component';
 import { EmailFormComponent } from '../email-form/email-form.component';
+import { Email } from '../email';
 
 @Component({
   selector: 'app-email-create',
@@ -11,5 +12,17 @@ import { EmailFormComponent } from '../email-form/email-form.component';
 export class EmailCreateComponent {
 
 showModal = false;
+email: Email;
+
+constructor(){
+  this.email = {
+    id: '',
+    to: '',
+    subject: '',
+    html: '',
+    text:'',
+    from:'fty@angular-email.com'
+  };
+}
 
 }
