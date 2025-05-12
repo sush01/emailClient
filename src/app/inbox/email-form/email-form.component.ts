@@ -9,26 +9,25 @@ import { ReactiveFormsModule } from '@angular/forms';
   selector: 'app-email-form',
   imports: [CommonModule, InputComponent, ReactiveFormsModule],
   templateUrl: './email-form.component.html',
-  styleUrls: ['./email-form.component.css'],  // Corrected 'styleUrls' here
+  styleUrls: ['./email-form.component.css'], 
 })
 export class EmailFormComponent implements OnInit {
   @Input() email: Email | undefined;
-  emailForm!:FormGroup;
+  emailForm: FormGroup;  
 
-  // Inject FormBuilder into the constructor
-  constructor(private fb: FormBuilder) {}
-
-  // Initialize emailForm using the FormBuilder
-  // emailForm: FormGroup = this.fb.group({
-  //   to: new FormControl(''),
-  //   from: new FormControl(''),
-  //   subject: new FormControl(''),
-  //   text: new FormControl(''),
-  // });
+  constructor(private fb: FormBuilder) {
+    // Initialize emailForm in the constructor
+    this.emailForm = this.fb.group({
+      to: new FormControl(''),
+      from: new FormControl(''),
+      subject: new FormControl(''),
+      text: new FormControl(''),
+    });
+  }
 
   ngOnInit() {
     if (this.email) {
-      // If an email is passed as input, populate the form (optional)
+      // If an email is passed as input, populate the form
       this.emailForm.patchValue({
         to: this.email.to,
         from: this.email.from,
