@@ -7,14 +7,14 @@ import { CommonModule } from '@angular/common';
   styleUrl: './modal.component.css'
 })
 export class ModalComponent implements OnInit {
-  @Output() dismiss = new EventEmitter();
+  @Output() dismiss = new EventEmitter<void>();
 
   constructor(private el: ElementRef){
 
   }
 
   ngOnInit() {
-      document.body.appendChild(this.el.nativeElement);
+      //document.body.appendChild(this.el.nativeElement);
   }
 
   ngOnDestroy(){
