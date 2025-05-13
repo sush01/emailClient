@@ -14,6 +14,7 @@ export class InputComponent {
   @Input() label: string = '';
   @Input() control!: FormControl<any>;
   @Input() inputType:string = 'text';
+  @Input() controlType:string = 'input';
 
 
   showErrors(){

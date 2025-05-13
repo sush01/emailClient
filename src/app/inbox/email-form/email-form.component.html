@@ -3,7 +3,8 @@
     <app-input [control]="toControl" inputType="email" label="To"></app-input>
     <app-input [control]="fromControl" inputType="email" label="From"></app-input>
     <app-input [control]="subjectControl" inputType="text" label="Subject"></app-input>
-    <app-input [control]="textControl" inputType="text" label="Text"></app-input>
+    <app-input controlType="textarea" [control]="textControl" inputType="text" label="Text"></app-input>
+
     <button class="ui button primary"> Send </button>
   </form>
   
