@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Email } from '../email';
 import { CommonModule } from '@angular/common';
 import { InputComponent } from '../../shared/input/input.component';
@@ -13,29 +13,20 @@ import { ReactiveFormsModule } from '@angular/forms';
 })
 export class EmailFormComponent implements OnInit {
   @Input() email: Email | undefined;
-  emailForm: FormGroup;  
+  emailForm!: FormGroup;  
 
   constructor(private fb: FormBuilder) {
-    // Initialize emailForm in the constructor
-    this.emailForm = this.fb.group({
-      to: new FormControl(''),
-      from: new FormControl(''),
-      subject: new FormControl(''),
-      text: new FormControl(''),
-    });
   }
 
   ngOnInit() {
-    if (this.email) {
-      // If an email is passed as input, populate the form
-      this.emailForm.patchValue({
-        to: this.email.to,
-        from: this.email.from,
-        subject: this.email.subject,
-        text: this.email.text,
-      });
+    this.emailForm = this.fb.group({
+      to: new FormControl(this.email?.to || '', [Validators.required, Validators.email]),
+      from: new FormControl({ value: this.email?.from || '', disabled: true }),
+      subject: new FormControl(this.email?.subject || '', [Validators.required]),
+      text: new FormControl(this.email?.text || '', [Validators.required]),
+    });
     }
-  }
+  
 
   // Getter methods to access individual form controls
   get toControl(): FormControl {
