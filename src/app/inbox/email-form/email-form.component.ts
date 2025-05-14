@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Email } from '../email';
 import { CommonModule } from '@angular/common';
@@ -12,8 +12,9 @@ import { ReactiveFormsModule } from '@angular/forms';
   styleUrls: ['./email-form.component.css'], 
 })
 export class EmailFormComponent implements OnInit {
-  @Input() email: Email | undefined;
+  @Input() email!: Email;
   emailForm!: FormGroup;  
+  @Output() emailSubmit = new EventEmitter<Email>();
 
   constructor(private fb: FormBuilder) {
   }
@@ -43,5 +44,14 @@ export class EmailFormComponent implements OnInit {
 
   get textControl(): FormControl {
     return this.emailForm.get('text') as FormControl;
+  }
+
+  onSubmit(){
+    if (this.emailForm.invalid){
+      return;
+    }
+    this.emailSubmit.emit(this.email);
+
+
   }
 }
