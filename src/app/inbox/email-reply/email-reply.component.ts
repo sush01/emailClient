@@ -1,4 +1,4 @@
-import { Component , Input, OnInit} from '@angular/core';
+import { Component , Input} from '@angular/core';
 import { ModalComponent } from '../../shared/modal/modal.component';
 import { CommonModule } from '@angular/common';
 import { Email } from '../email';
@@ -11,7 +11,7 @@ import { EmailService } from '../email.service';
   templateUrl: './email-reply.component.html',
   styleUrl: './email-reply.component.css'
 })
-export class EmailReplyComponent implements OnInit {
+export class EmailReplyComponent {
 showModal = false;
 @Input() email!: Email;
 text = this.email.text.replace(/\n/gi,'\n>');
@@ -20,7 +20,7 @@ constructor(private emailService: EmailService){
 
 }
 
-ngOnInit() {
+ngOnChanges() {
     this.email = {
       ...this.email,
       from: this.email.to,
