@@ -50,7 +50,8 @@ export class EmailFormComponent implements OnInit {
     if (this.emailForm.invalid){
       return;
     }
-    this.emailSubmit.emit(this.email);
+    this.emailSubmit.emit(this.emailForm.getRawValue());
+    //this.emailSubmit.emit(this.email);
 
 
   }

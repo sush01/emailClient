@@ -31,7 +31,9 @@ getEmail(id: string){
 }
 
 sendEmail(email: Email){
-  return this.http.post(`${this.rootUrl}/emails`, email);
+  return this.http.post(`${this.rootUrl}/emails`, email , {
+    withCredentials: true
+  });
 }
 
 }

@@ -34,8 +34,8 @@ constructor(
   };
 }
 
-onSubmit (email: Email){
-  console.log("email");
+onSubmitEmail (email: Email){
+  console.log("email submitted", email);
   this.emailService.sendEmail(email).subscribe(() => {
     this.showModal = false;
   })
