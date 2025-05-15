@@ -1,10 +1,9 @@
-
-  <form class="ui form" [formGroup]="emailForm" (ngSubmit)="onSubmit()">
+<form class="ui form" [formGroup]="emailForm" (ngSubmit)="onSubmit()">
     <app-input [control]="toControl" inputType="email" label="To"></app-input>
     <app-input [control]="fromControl" inputType="email" label="From"></app-input>
     <app-input [control]="subjectControl" inputType="text" label="Subject"></app-input>
     <app-input controlType="textarea" [control]="textControl" inputType="text" label="Text"></app-input>
 
     <button type="submit" class="ui button primary"> Send </button>
-  </form>
+</form>
   
